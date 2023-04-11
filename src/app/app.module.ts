@@ -10,13 +10,20 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
-import {AngularFireLite} from 'angularfire-lite';
+import {HomeComponent} from './pages/home/home.component';
+import {WeatherCardComponent} from './ui/weather-card/weather-card.component';
+import {ErrorComponent} from './ui/error/error.component';
+import {AddCardComponent} from './ui/add-card/add-card.component';
 
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent,
+    WeatherCardComponent,
+    ErrorComponent,
+    AddCardComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

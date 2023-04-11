@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core'
+import { Observable } from 'rxjs';
+import {FireBaseService} from '../../services/firebase.service';
 
 @Component({
     selector: 'app-home',
@@ -6,13 +8,17 @@ import { Component, OnInit } from '@angular/core'
     styleUrls: ['./home.component.css']
   })
   export class HomeComponent implements OnInit {
-    cities: string[] = [];
+    cities!: Observable<any>;
 
-    constructor() {
+    constructor(private fireBaseService: FireBaseService) {
     }
 
     ngOnInit() {
-       return this.cities;
-      }
+      this.cities = this.fireBaseService.getCities();
+     }
       
+}
+
+export class City{
+  name: string = "";
 }

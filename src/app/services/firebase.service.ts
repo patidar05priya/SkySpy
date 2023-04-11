@@ -1,9 +1,10 @@
 import {Injectable, NgZone} from '@angular/core';
-import { of as observableOf  } from 'rxjs';
+import { of, of as observableOf  } from 'rxjs';
 import '@firebase/auth'
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore, AngularFirestoreDocument} from '@angular/fire/compat/firestore';
+import { City } from '../pages/home/home.component';
 @Injectable({
     providedIn: 'root'
 })
@@ -44,7 +45,7 @@ export class FireBaseService {
       }
       
       getCities() {
-       
+        return of({name: "test"})
       }
 
       SignOut() {
