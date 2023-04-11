@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import {UiService} from './services/ui.service';
-import {FireBaseService} from './services/firebase.service';
 
 import {Router} from '@angular/router';
+import { Subscription, Observable, of as observableOf  } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -15,21 +15,24 @@ export class AppComponent implements OnInit, OnDestroy {
   darkModeActive: boolean = false;
 
   userEmail = "";
-  sub1: any;
+  sub1: Subscription = new Subscription;
 
-  constructor(public fireBase: FireBaseService, public ui: UiService, public router: Router) {
+  constructor( public ui: UiService, public router: Router) {
   }
 
-  loggedIn = this.fireBase.isAuth();
+  loggedIn = this.method();
+
+  method(): Observable<boolean> {
+   return observableOf(true);;
+
+  }
 
   ngOnInit(): void {
     this.sub1 = this.ui.darkModeState.subscribe((value : any) => {
       this.darkModeActive = value;
     });
 
-    this.fireBase.auth.userData().subscribe((user) => {
-      this.userEmail = user.email;
-    });
+   
   }
 
   toggleMenu() {
@@ -47,6 +50,6 @@ export class AppComponent implements OnInit, OnDestroy {
   logout() {
     this.toggleMenu();
     this.router.navigateByUrl('/login');
-    this.fireBase.auth.signout();
+   // this.fireBase.auth.signout();
   }
 }
