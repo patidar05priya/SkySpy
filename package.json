@@ -22,6 +22,7 @@
     "@angular/service-worker": "^15.2.6",
     "angularfire-lite": "^6.0.3",
     "firebase": "^9.19.1",
+    "@ngui/auto-complete": "^2.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.12.0"

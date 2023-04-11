@@ -1,16 +1,24 @@
 import {Injectable, NgZone} from '@angular/core';
-import { of, of as observableOf  } from 'rxjs';
+import { of, of as observableOf ,Observable } from 'rxjs';
 import '@firebase/auth'
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import {
+  AngularFireDatabase,
+  AngularFireList,
+  AngularFireObject,
+} from '@angular/fire/compat/database';
 import { AngularFirestore, AngularFirestoreDocument} from '@angular/fire/compat/firestore';
 import { City } from '../pages/home/home.component';
 @Injectable({
     providedIn: 'root'
 })
 export class FireBaseService {
+  citiesRef!: AngularFireList<any>;
 
-  constructor(public afs: AngularFirestore, public afAuth: AngularFireAuth, public router: Router, public ngZone: NgZone 
+
+  constructor(public afs: AngularFirestore, public afAuth: AngularFireAuth, public router: Router, 
+    public ngZone: NgZone, private db: AngularFireDatabase
   ) {}
       isAuth() {
         const user = JSON.parse(localStorage.getItem('user')!);
@@ -45,7 +53,9 @@ export class FireBaseService {
       }
       
       getCities() {
-        return of({name: "test"})
+        console.log(this.db.list)
+        this.citiesRef = this.db.list('cities');
+        return of(this.citiesRef);
       }
 
       SignOut() {
@@ -55,8 +65,10 @@ export class FireBaseService {
         });
       }
     
-      addCity(name: string) {
-        
+      addCity(name: string): Observable<any> {
+        return of(this.citiesRef.push({
+          name: name
+        }));
       }
 
 }

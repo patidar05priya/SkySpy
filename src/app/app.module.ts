@@ -13,7 +13,9 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import {HomeComponent} from './pages/home/home.component';
 import {WeatherCardComponent} from './ui/weather-card/weather-card.component';
 import {ErrorComponent} from './ui/error/error.component';
+import {NguiAutoCompleteModule} from '@ngui/auto-complete';
 import {AddCardComponent} from './ui/add-card/add-card.component';
+import {AddComponent} from './pages/add/add.component';
 
 
 
@@ -23,17 +25,18 @@ import {AddCardComponent} from './ui/add-card/add-card.component';
     HomeComponent,
     WeatherCardComponent,
     ErrorComponent,
-    AddCardComponent
+    AddCardComponent,
+    AddComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
+    HttpClientModule,
     AngularFirestoreModule,
     AngularFireStorageModule,
     AngularFireDatabaseModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
     ],
   providers: [],

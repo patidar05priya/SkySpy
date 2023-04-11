@@ -15,10 +15,11 @@ export class AppComponent implements OnInit, OnDestroy {
   
   showMenu = false;
   darkModeActive: boolean = false;
+  sub1: Subscription = new Subscription;
+
   myDate = new Date();
 
   userEmail = "";
-  sub1: Subscription = new Subscription;
   loggedIn = this.firebase.isAuth();
 
 
