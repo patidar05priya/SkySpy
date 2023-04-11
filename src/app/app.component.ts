@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import {UiService} from './services/ui.service';
-import {FireBaseServce} from './services/firebase.service';
-
+import {FireBaseService} from './services/firebase.service';
 
 import {Router} from '@angular/router';
 
@@ -18,7 +17,7 @@ export class AppComponent implements OnInit, OnDestroy {
   userEmail = "";
   sub1: any;
 
-  constructor(public fireBase: FireBaseServce, public ui: UiService, public router: Router) {
+  constructor(public fireBase: FireBaseService, public ui: UiService, public router: Router) {
   }
 
   loggedIn = this.fireBase.isAuth();

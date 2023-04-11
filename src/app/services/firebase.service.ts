@@ -6,7 +6,7 @@ import '@firebase/auth'
 @Injectable({
     providedIn: 'root'
 })
-export class FireBaseServce {
+export class FireBaseService {
 
     constructor(public auth: AngularFireLiteAuth, public fs: AngularFireLiteFirestore) {
     }
