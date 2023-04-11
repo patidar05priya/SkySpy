@@ -1,8 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import {UiService} from './services/ui.service';
 import { DatePipe } from '@angular/common';
-
-
+import {FireBaseService} from './services/firebase.service';
 import {Router} from '@angular/router';
 import { Subscription, Observable, of as observableOf  } from 'rxjs';
 
@@ -18,21 +17,15 @@ export class AppComponent implements OnInit, OnDestroy {
   darkModeActive: boolean = false;
   myDate = new Date();
 
-
   userEmail = "";
   sub1: Subscription = new Subscription;
+  loggedIn = this.firebase.isAuth();
 
-  constructor( public ui: UiService, public router: Router, private datePipe: DatePipe) {
-    //this.myDate = this.datePipe.transform(this.myDate, 'yyyy-MM-dd');
 
-  }
-
-  loggedIn = this.method();
-
-  method(): Observable<boolean> {
-   return observableOf(true);;
+  constructor( public ui: UiService, public router: Router, private datePipe: DatePipe, private firebase : FireBaseService) {
 
   }
+
 
   ngOnInit(): void {
     this.sub1 = this.ui.darkModeState.subscribe((value : any) => {
