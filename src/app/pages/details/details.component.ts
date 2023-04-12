@@ -26,6 +26,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
   errorMessage: string ="";
 
   constructor(public activeRouter: ActivatedRoute, public weather: WeatherService, public ui: UiService) {
+    console.log("========")
 
   }
 
@@ -92,7 +93,6 @@ export class DetailsComponent implements OnInit, OnDestroy {
       }, 2500);
     });
 
-    console.log("========")
     console.log(this.daysForecast)
   }
 

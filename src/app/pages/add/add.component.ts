@@ -34,19 +34,24 @@ export class AddComponent implements OnInit, OnDestroy {
       this.temp = Math.ceil(Number(payload.main.temp));
     });
 
-    this.http.get('https://restcountries.eu/rest/v2/all').pipe((first())).subscribe((countries: any)  => {
+    this.http.get('https://restcountries.com/v3.1/all').pipe((first())).subscribe((countries: any)  => {
       this.countries =countries;
       this.countries.forEach((country) => {
-        if (country.capital.length) {
-          this.capitals.push(country.capital);
+        
+        if(country.capital && country.capital.length == 1){
+          console.log(country)
+          this.capitals.push(country.capital[0].toLowerCase( ));
         }
+       
+        
       });
+     
       this.capitals.sort();
     });
 
     this.sub1 = this.fb.getCities().subscribe((cities) => {
       Object.values(cities).forEach((city: any) => {
-        if (city.name === 'Rome') {
+        if (city.name === 'Cary') {
           this.followedCM = true;
         }
       });
@@ -54,7 +59,6 @@ export class AddComponent implements OnInit, OnDestroy {
   }
 
   selectCity(city: any) {
-    console.log(city)
     if (this.capitals.includes(city)) {
       this.cardCity = city;
       this.showNote = false;
