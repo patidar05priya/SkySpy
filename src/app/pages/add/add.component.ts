@@ -54,6 +54,7 @@ export class AddComponent implements OnInit, OnDestroy {
   }
 
   selectCity(city: any) {
+    console.log(city)
     if (this.capitals.includes(city)) {
       this.cardCity = city;
       this.showNote = false;

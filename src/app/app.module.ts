@@ -30,6 +30,7 @@ import {AddComponent} from './pages/add/add.component';
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
+    NguiAutoCompleteModule,
     HttpClientModule,
     AngularFirestoreModule,
     AngularFireStorageModule,
