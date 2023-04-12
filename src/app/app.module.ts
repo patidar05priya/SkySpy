@@ -16,6 +16,8 @@ import {ErrorComponent} from './ui/error/error.component';
 import {NguiAutoCompleteModule} from '@ngui/auto-complete';
 import {AddCardComponent} from './ui/add-card/add-card.component';
 import {AddComponent} from './pages/add/add.component';
+import {AutocompleteLibModule} from 'angular-ng-autocomplete';
+
 
 
 
@@ -30,7 +32,7 @@ import {AddComponent} from './pages/add/add.component';
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
-    NguiAutoCompleteModule,
+    AutocompleteLibModule,
     HttpClientModule,
     AngularFirestoreModule,
     AngularFireStorageModule,

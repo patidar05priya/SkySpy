@@ -8,7 +8,6 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "postinstall": "ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points"
-
   },
   "private": true,
   "dependencies": {
@@ -23,6 +22,7 @@
     "@angular/router": "^15.2.0",
     "@angular/service-worker": "^15.2.6",
     "@ngui/auto-complete": "^2.0.0",
+    "angular-ng-autocomplete": "^2.0.12",
     "angularfire-lite": "^6.0.3",
     "firebase": "^9.19.1",
     "rxjs": "~7.8.0",
