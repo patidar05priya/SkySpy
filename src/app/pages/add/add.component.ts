@@ -64,7 +64,7 @@ export class AddComponent implements OnInit, OnDestroy {
   }
 
   addCityOfTheMonth() {
-    this.fb.addCity('Rome').subscribe(() => {
+    this.fb.addCity('Cary').subscribe(() => {
       this.followedCM = true;
     });
   }
