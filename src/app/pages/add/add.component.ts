@@ -13,7 +13,7 @@ import { Subscription } from 'rxjs';
 export class AddComponent implements OnInit, OnDestroy {
 
   temp: any;
-  city = 'Rome';
+  city = 'Cary';
   state: any
   capitals: any[] = [];
   countries: any[] = [];
