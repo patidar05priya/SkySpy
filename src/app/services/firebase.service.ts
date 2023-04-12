@@ -38,7 +38,7 @@ export class FireBaseService {
       .then((result) => {
         this.afAuth.authState.subscribe((user) => {
           if (user) {
-            this.router.navigate(['add']);
+            this.router.navigate(['**']);
             localStorage.setItem('user', JSON.stringify(user));
           }
         });

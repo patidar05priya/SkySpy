@@ -39,7 +39,6 @@ export class AddComponent implements OnInit, OnDestroy {
       this.countries.forEach((country) => {
         
         if(country.capital && country.capital.length == 1){
-          console.log(country)
           this.capitals.push(country.capital[0].toLowerCase( ));
         }
        
