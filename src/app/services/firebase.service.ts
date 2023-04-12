@@ -9,7 +9,6 @@ import {
   AngularFireObject,
 } from '@angular/fire/compat/database';
 import { AngularFirestore, AngularFirestoreDocument} from '@angular/fire/compat/firestore';
-import { City } from '../pages/home/home.component';
 @Injectable({
     providedIn: 'root'
 })
@@ -22,12 +21,12 @@ export class FireBaseService {
   ) {}
       isAuth() {
         const user = JSON.parse(localStorage.getItem('user')!);
-        return observableOf(true);
-        //return observableOf(user !== null && user.emailVerified !== false ? true : false);
+        //return observableOf(true);
+        return observableOf(user !== null && user.emailVerified !== false ? true : false);
       }
     
       signin(email: string, pass: string) {
-        return this.afAuth
+        const auth =  this.afAuth
       .signInWithEmailAndPassword(email, pass)
       .then((result) => {
         this.afAuth.authState.subscribe((user) => {
@@ -39,10 +38,11 @@ export class FireBaseService {
       .catch((error) => {
         window.alert(error.message);
       });
+      return of(auth)
       }
     
       signup(email: string, password: string) {
-        return this.afAuth
+        const auth = this.afAuth
       .createUserWithEmailAndPassword(email, password)
       .then((result) => {
        
@@ -50,6 +50,7 @@ export class FireBaseService {
       .catch((error) => {
         window.alert(error.message);
       });
+      return of(auth)
       }
       
       getCities() {
