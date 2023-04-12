@@ -51,6 +51,6 @@ export class AppComponent implements OnInit, OnDestroy {
   logout() {
     this.toggleMenu();
     this.router.navigateByUrl('/login');
-   // this.fireBase.auth.signout();
+    this.firebase.SignOut();
   }
 }

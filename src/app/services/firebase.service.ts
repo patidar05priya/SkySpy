@@ -6,7 +6,6 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import {
   AngularFireDatabase,
   AngularFireList,
-  AngularFireObject,
 } from '@angular/fire/compat/database';
 import { AngularFirestore, AngularFirestoreDocument} from '@angular/fire/compat/firestore';
 @Injectable({
@@ -14,15 +13,23 @@ import { AngularFirestore, AngularFirestoreDocument} from '@angular/fire/compat/
 })
 export class FireBaseService {
   citiesRef!: AngularFireList<any>;
-
+  userData: any;
 
   constructor(public afs: AngularFirestore, public afAuth: AngularFireAuth, public router: Router, 
     public ngZone: NgZone, private db: AngularFireDatabase
-  ) {}
+  ) {
+    this.afAuth.authState.subscribe((user) => {
+      if (user) {
+        this.userData = user;
+        localStorage.setItem('user', JSON.stringify(this.userData));
+        JSON.parse(localStorage.getItem('user')!);
+      } 
+    });
+  }
       isAuth() {
         const user = JSON.parse(localStorage.getItem('user')!);
-        //return observableOf(true);
-        return observableOf(user !== null && user.emailVerified !== false ? true : false);
+        const res = user !== null;
+        return observableOf(res);
       }
     
       signin(email: string, pass: string) {
@@ -31,7 +38,8 @@ export class FireBaseService {
       .then((result) => {
         this.afAuth.authState.subscribe((user) => {
           if (user) {
-            this.router.navigate(['dashboard']);
+            this.router.navigate(['']);
+            localStorage.setItem('user', JSON.stringify(user));
           }
         });
       })
@@ -54,15 +62,16 @@ export class FireBaseService {
       }
       
       getCities() {
-        console.log(this.db.list)
         this.citiesRef = this.db.list('cities');
         return of(this.citiesRef);
       }
 
       SignOut() {
         return this.afAuth.signOut().then(() => {
+          console.log(localStorage)
           localStorage.removeItem('user');
-          this.router.navigate(['sign-in']);
+          console.log(localStorage)
+          this.router.navigate(['login']);
         });
       }
     
