@@ -13,12 +13,12 @@ import {first} from 'rxjs/operators';
   })
 export class WeatherCardComponent implements OnInit, OnDestroy {
 
-
     @Input() set city(city: string) {
         this.cityName = city;
         this.weather.getWeather(city)
           .pipe(first())
           .subscribe((payload: { weather: { main: string; }[]; main: { temp: number; }; }) => {
+          
             this.state = payload.weather[0].main;
             this.temp = Math.ceil(payload.main.temp);
           }, (err: { error: { message: string; }; }) => {
@@ -29,15 +29,11 @@ export class WeatherCardComponent implements OnInit, OnDestroy {
           });
         this.weather.getForecast(city)
           .pipe(first())
-          .subscribe((payload: { main: { temp: number; }; }[]) => {
-            this.maxTemp = Math.round(payload[0].main.temp);
-            this.minTemp = Math.round(payload[0].main.temp);
-            for (const res of payload) {
-              if (new Date().toLocaleDateString('en-GB') === new Date().toLocaleDateString('en-GB')) {
-                this.maxTemp = res.main.temp > this.maxTemp ? Math.round(res.main.temp) : this.maxTemp;
-                this.minTemp = res.main.temp < this.minTemp ? Math.round(res.main.temp) : this.minTemp;
-              }
-            }
+          .subscribe((payload: any) => {
+            console.log(payload['list'][0]['main'])
+            this.maxTemp = Math.round(payload['list'][0]['main'].temp_max);
+            this.minTemp = Math.round(payload['list'][0]['main'].temp_min);
+          
           }, (err: { error: { message: string; }; }) => {
             this.errorMessage = err.error.message;
             setTimeout(() => {

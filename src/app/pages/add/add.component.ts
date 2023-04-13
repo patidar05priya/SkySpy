@@ -62,7 +62,6 @@ export class AddComponent implements OnInit, OnDestroy {
   }
 
   selectCity(city: any) {
-
     this.filteredOptions = this.myControl.valueChanges
       .pipe(
         startWith(city),
@@ -72,6 +71,8 @@ export class AddComponent implements OnInit, OnDestroy {
     if (this.capitals.includes(val[0])) {
       this.cardCity = city;
       this.showNote = false;
+    }else{
+      this.showNote = true;
     }
      
     });
