@@ -18,7 +18,6 @@ export class WeatherCardComponent implements OnInit, OnDestroy {
         this.weather.getWeather(city)
           .pipe(first())
           .subscribe((payload: { weather: { main: string; }[]; main: { temp: number; }; }) => {
-          
             this.state = payload.weather[0].main;
             this.temp = Math.ceil(payload.main.temp);
           }, (err: { error: { message: string; }; }) => {
@@ -30,7 +29,6 @@ export class WeatherCardComponent implements OnInit, OnDestroy {
         this.weather.getForecast(city)
           .pipe(first())
           .subscribe((payload: any) => {
-            console.log(payload['list'][0]['main'])
             this.maxTemp = Math.round(payload['list'][0]['main'].temp_max);
             this.minTemp = Math.round(payload['list'][0]['main'].temp_min);
           
