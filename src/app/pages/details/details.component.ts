@@ -26,12 +26,10 @@ export class DetailsComponent implements OnInit, OnDestroy {
   errorMessage: string ="";
 
   constructor(public activeRouter: ActivatedRoute, public weather: WeatherService, public ui: UiService) {
-    console.log("========")
 
   }
 
   ngOnInit() {
-    console.log("========")
     this.sub1 = this.ui.darkModeState.subscribe((isDark) => {
       this.darkMode = isDark;
     });
