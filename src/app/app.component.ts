@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, DoCheck} from '@angular/core';
 import {UiService} from './services/ui.service';
 import { DatePipe } from '@angular/common';
 import {FireBaseService} from './services/firebase.service';
@@ -11,7 +11,7 @@ import { Subscription, Observable, of as observableOf  } from 'rxjs';
   styleUrls: ['./app.component.css'],
   providers: [DatePipe]
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent implements OnInit, OnDestroy, DoCheck {
   
   showMenu = false;
   darkModeActive: boolean = false;
@@ -27,12 +27,14 @@ export class AppComponent implements OnInit, OnDestroy {
 
   }
 
+  ngDoCheck(): void {
+    this.loggedIn = this.firebase.isAuth();
+  }
 
   ngOnInit(): void {
     this.sub1 = this.ui.darkModeState.subscribe((value : any) => {
       this.darkModeActive = value;
     });
-
    
   }
 
@@ -50,7 +52,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
   logout() {
     this.toggleMenu();
-    this.router.navigateByUrl('/login');
     this.firebase.SignOut();
   }
 }

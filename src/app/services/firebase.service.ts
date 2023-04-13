@@ -68,9 +68,7 @@ export class FireBaseService {
 
       SignOut() {
         return this.afAuth.signOut().then(() => {
-          console.log(localStorage)
           localStorage.removeItem('user');
-          console.log(localStorage)
           this.router.navigate(['login']);
         });
       }

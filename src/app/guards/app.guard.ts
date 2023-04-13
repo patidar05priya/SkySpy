@@ -7,7 +7,7 @@ import {map} from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class AppGuard implements CanActivate {
+export class AppGuard  {
   constructor(public fb: FireBaseService, public router: Router) {
   }
 
